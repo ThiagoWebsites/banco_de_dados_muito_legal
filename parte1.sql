@@ -3,11 +3,13 @@ CREATE DATABASE sistema_vendas_22c;
 USE sistema_vendas_22c;
 
 CREATE TABLE cliente(
+id_cliente int not null,
 nome varchar(50) not null,
 endereco varchar(100) not null,
 email varchar(50),
 celular tinyint(30) unsigned not null,
-dt_nascimento date
+dt_nascimento date,
+PRIMARY KEY(Id_cliente)
 );
 
 CREATE TABLE produto(
@@ -24,14 +26,16 @@ id_pedido tinyint unsigned primary key auto_increment not null,
 dt_compra date,
 valor decimal(6,2),
 dt_estimada_entrega date,
-foreign key(id_produtos)
-REFERENCES produto(id_produtos)
+foreign key(id_cliente)
+REFERENCES cliente(id_cliente)
 );
 
 CREATE TABLE itens(
 quantidade tinyint unsigned not null,
 valor_unitário decimal(6,2),
-foreign key(numero_pedido)
-references pedido(numero_pedido),
-valor_total int
+valor_total int,
+Foreign KEY (id_produto)
+REFERENCES produto(id_produto),
+Foreign KEY (id_pedido)
+REFERENCES pedido (id_pedido)
 );
